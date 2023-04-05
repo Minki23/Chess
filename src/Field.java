@@ -34,7 +34,7 @@ public class Field extends JButton {
             last = current;
             current = this;
             if (last != null && last.getClass() != Field.class && last != current)
-                if (((Piece) last).freeLocation(((Piece) last), false, false, null, false, null).contains(current)) {
+                if (((Piece) last).AvaliableLocation(((Piece) last), false, false, null, false, null).contains(current)) {
                     last.movePiece((Piece) last);
                 }
         });

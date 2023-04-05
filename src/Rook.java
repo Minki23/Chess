@@ -21,7 +21,7 @@ public class Rook extends Piece {
 
 
     @Override
-    public ArrayList<Field> freeLocation(Piece piece, boolean checkforChecks, boolean insert, Field insertField, boolean treatAsEmpty, Field treatedAsEmpty) {
+    public ArrayList<Field> AvaliableLocation(Piece piece, boolean checkforChecks, boolean insert, Field insertField, boolean treatAsEmpty, Field treatedAsEmpty) {
         ArrayList<Field> avaliable = new ArrayList<>();
         Field searched;
         if (isWhite()) {

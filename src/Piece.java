@@ -27,7 +27,7 @@ public abstract class Piece extends Field {
         this.setBackground(Color.RED);
         this.setBounds(50 * location.getX(), 50 * location.getY(), 50, 50);
         this.addActionListener(e -> {
-            ArrayList<Field> free = freeLocation(this, true, false, null, false, null);
+            ArrayList<Field> free = AvaliableLocation(this, true, false, null, false, null);
             if (!this.isCLicked()) {
                 for (int i = 0; i < 8; i++)
                     for (int j = 0; j < 8; j++)
@@ -112,7 +112,7 @@ public abstract class Piece extends Field {
         return white;
     }
 
-    public abstract ArrayList<Field> freeLocation(Piece piece, boolean checkforChecks, boolean insert, Field insertField, boolean treatAsEmpty, Field treatedAsEmpty);
+    public abstract ArrayList<Field> AvaliableLocation(Piece piece, boolean checkforChecks, boolean insert, Field insertField, boolean treatAsEmpty, Field treatedAsEmpty);
 
     public King getYourKing() {
         return yourKing;
@@ -138,7 +138,7 @@ public abstract class Piece extends Field {
                     if (whitePiece.getLocalization().getX() + 1 < 8 && whitePiece.getLocalization().getY() + 1 < 8)
                         Main.getFields()[whitePiece.getLocalization().getX() + 1][whitePiece.getLocalization().getY() + 1].getAttacksbyWhite().add(whitePiece);
                 } else {
-                    for (Field field1 : whitePiece.freeLocation(whitePiece, false, false, null, false, null)) {
+                    for (Field field1 : whitePiece.AvaliableLocation(whitePiece, false, false, null, false, null)) {
                         Main.getFields()[field1.getLocalization().getX()][field1.getLocalization().getY()].getAttacksbyWhite().add(whitePiece);
                         if (Main.getFields()[field1.getLocalization().getX()][field1.getLocalization().getY()] == Main.getBlackKing()) {
                             Main.getBlackKing().setChecked(true);
@@ -148,7 +148,7 @@ public abstract class Piece extends Field {
             }
             int legalMoves = 0;
             for (Piece blackPieces : Main.getBlackPieces()) {
-                legalMoves += blackPieces.freeLocation(blackPieces, true, false, null, false, null).size();
+                legalMoves += blackPieces.AvaliableLocation(blackPieces, true, false, null, false, null).size();
             }
             if (legalMoves == 0 && Main.getBlackKing().isChecked())
                 Popup("White win");
@@ -159,11 +159,11 @@ public abstract class Piece extends Field {
             for (Piece blackPiece : Main.getBlackPieces()) {
                 if (blackPiece.getClass() == Pawn.class) {
                     if (blackPiece.getLocalization().getX() - 1 >= 0 && blackPiece.getLocalization().getY() - 1 >= 0)
-                        Main.getFields()[blackPiece.getLocalization().getX() - 1][blackPiece.getLocalization().getY() - 1].getAttacksbyWhite().add(blackPiece);
+                        Main.getFields()[blackPiece.getLocalization().getX() - 1][blackPiece.getLocalization().getY() - 1].getAttacksbyBlack().add(blackPiece);
                     if (blackPiece.getLocalization().getX() + 1 < 8 && blackPiece.getLocalization().getY() - 1 >= 0)
-                        Main.getFields()[blackPiece.getLocalization().getX() + 1][blackPiece.getLocalization().getY() - 1].getAttacksbyWhite().add(blackPiece);
+                        Main.getFields()[blackPiece.getLocalization().getX() + 1][blackPiece.getLocalization().getY() - 1].getAttacksbyBlack().add(blackPiece);
                 } else {
-                    for (Field field1 : blackPiece.freeLocation(blackPiece, false, false, null, false, null)) {
+                    for (Field field1 : blackPiece.AvaliableLocation(blackPiece, false, false, null, false, null)) {
                         Main.getFields()[field1.getLocalization().getX()][field1.getLocalization().getY()].getAttacksbyBlack().add(blackPiece);
                         if (Main.getFields()[field1.getLocalization().getX()][field1.getLocalization().getY()] == Main.getWhiteKing()) {
                             Main.getWhiteKing().setChecked(true);
@@ -173,7 +173,7 @@ public abstract class Piece extends Field {
             }
             int legalMoves = 0;
             for (Piece whitePiece : Main.getWhitePieces()) {
-                legalMoves += whitePiece.freeLocation(whitePiece, true, false, null, false, null).size();
+                legalMoves += whitePiece.AvaliableLocation(whitePiece, true, false, null, false, null).size();
             }
             if (legalMoves == 0 && Main.getWhiteKing().isChecked())
                 Popup("Black wins");
@@ -186,7 +186,7 @@ public abstract class Piece extends Field {
     public ArrayList<Field> blocks(ArrayList<Field> avaliable) {
         avaliable.clear();
         if (getYourKing().isChecked()) {
-            for (Field field : this.freeLocation(this, false, false, null, false, null))
+            for (Field field : this.AvaliableLocation(this, false, false, null, false, null))
                 if (wouldPutInCheck(field)) {
                     avaliable.add(field);
                 }
@@ -196,7 +196,7 @@ public abstract class Piece extends Field {
 
     public boolean wouldPutInCheck(Field field) {
         for (Piece enemyPiece : getEnemyPieces()) {
-            if (enemyPiece.freeLocation(enemyPiece, false, true, field, false, null).contains(getYourKing()) && field != enemyPiece) {
+            if (enemyPiece.AvaliableLocation(enemyPiece, false, true, field, false, null).contains(getYourKing()) && field != enemyPiece) {
                 return false;
             }
         }
@@ -217,7 +217,7 @@ public abstract class Piece extends Field {
 
     public boolean wouldPutInCheckOnMove(Field field, Field newField) {
         for (Piece enemyPiece : getEnemyPieces()) {
-            if (field != enemyPiece && enemyPiece.freeLocation(enemyPiece, false, true, newField, true, field).contains(getYourKing())) {
+            if (newField != enemyPiece && enemyPiece.AvaliableLocation(enemyPiece, false, true, newField, true, field).contains(getYourKing())) {
                 return false;
             }
         }

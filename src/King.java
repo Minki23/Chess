@@ -23,7 +23,7 @@ public class King extends Piece {
 
 
     @Override
-    public ArrayList<Field> freeLocation(Piece piece, boolean checkforchecks, boolean insert, Field insertField, boolean treatAsEmpty, Field treatedAsEmpty) {
+    public ArrayList<Field> AvaliableLocation(Piece piece, boolean checkforchecks, boolean insert, Field insertField, boolean treatAsEmpty, Field treatedAsEmpty) {
 
         ArrayList<Field> avaliable = new ArrayList<>();
         Field field;
@@ -158,10 +158,14 @@ public class King extends Piece {
         for (Piece enemyPiece : getEnemyPieces()) {
             if (field != enemyPiece) {
                 if (isWhite()) {
-                    if ((field.getAttacksbyBlack().size() != 0 && enemyPiece.getAttacksbyBlack().size() != 0) || (enemyPiece.freeLocation(enemyPiece, false, false, null, true, this).contains(field) && enemyPiece.getClass() != Pawn.class))
+                    if ((field.getAttacksbyBlack().size() != 0 && enemyPiece.getAttacksbyBlack().size() != 0))
+                        return false;
+                    if(enemyPiece.AvaliableLocation(enemyPiece, false, false, null, true, this).contains(field) && enemyPiece.getClass() != Pawn.class)
                         return false;
                 } else {
-                    if ((field.getAttacksbyWhite().size() != 0 && enemyPiece.getAttacksbyWhite().size() != 0) || (enemyPiece.freeLocation(enemyPiece, false, false, null, true, this).contains(field) && enemyPiece.getClass() != Pawn.class))
+                    if ((field.getAttacksbyWhite().size() != 0 && enemyPiece.getAttacksbyWhite().size() != 0))
+                        return false;
+                    if(enemyPiece.AvaliableLocation(enemyPiece, false, false, null, true, this).contains(field) && enemyPiece.getClass() != Pawn.class)
                         return false;
                 }
             }
