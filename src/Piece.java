@@ -150,9 +150,9 @@ public abstract class Piece extends Field {
             for (Piece blackPieces : Main.getBlackPieces()) {
                 legalMoves += blackPieces.freeLocation(blackPieces, true, false, null, false, null).size();
             }
-            if (legalMoves == 0&& Main.getBlackKing().isChecked())
+            if (legalMoves == 0 && Main.getBlackKing().isChecked())
                 Popup("White win");
-            else if (legalMoves == 0&&!Main.getBlackKing().isChecked()) {
+            else if (legalMoves == 0 && !Main.getBlackKing().isChecked()) {
                 Popup("Stalemate");
             }
         } else {
@@ -175,9 +175,9 @@ public abstract class Piece extends Field {
             for (Piece whitePiece : Main.getWhitePieces()) {
                 legalMoves += whitePiece.freeLocation(whitePiece, true, false, null, false, null).size();
             }
-            if (legalMoves == 0&& Main.getWhiteKing().isChecked())
+            if (legalMoves == 0 && Main.getWhiteKing().isChecked())
                 Popup("Black wins");
-            else if (legalMoves == 0&&!Main.getWhiteKing().isChecked()) {
+            else if (legalMoves == 0 && !Main.getWhiteKing().isChecked()) {
                 Popup("Stalemate");
             }
         }
@@ -196,7 +196,7 @@ public abstract class Piece extends Field {
 
     public boolean wouldPutInCheck(Field field) {
         for (Piece enemyPiece : getEnemyPieces()) {
-            if (enemyPiece.freeLocation(enemyPiece, false, true, field, false, null).contains(getYourKing())&& field != enemyPiece) {
+            if (enemyPiece.freeLocation(enemyPiece, false, true, field, false, null).contains(getYourKing()) && field != enemyPiece) {
                 return false;
             }
         }
@@ -217,27 +217,28 @@ public abstract class Piece extends Field {
 
     public boolean wouldPutInCheckOnMove(Field field, Field newField) {
         for (Piece enemyPiece : getEnemyPieces()) {
-            if (field != enemyPiece && enemyPiece.freeLocation(enemyPiece, false, true, newField,true, field).contains(getYourKing())) {
+            if (field != enemyPiece && enemyPiece.freeLocation(enemyPiece, false, true, newField, true, field).contains(getYourKing())) {
                 return false;
             }
         }
         return true;
     }
+
     public void Popup(String winner) {
-        for(int i=0;i<8;i++)
-            for(int j=0;j<8;j++)
+        for (int i = 0; i < 8; i++)
+            for (int j = 0; j < 8; j++)
                 Main.getFields()[i][j].setEnabled(false);
         JDialog dialog = new JDialog();
-        dialog.setSize(400,200);
+        dialog.setSize(400, 200);
         dialog.setVisible(true);
         dialog.setLocationRelativeTo(null);
         dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         dialog.setResizable(false);
         dialog.setTitle("Game is over");
-        JPanel panel =new JPanel();
+        JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        JLabel label= new JLabel();
+        JLabel label = new JLabel();
         panel.add(label);
         dialog.add(panel);
         label.setText(winner);

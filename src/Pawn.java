@@ -66,8 +66,8 @@ public class Pawn extends Piece {
                     }
                 }
             }
-            if (this.getLocalization().getY() - 1 >= 0 && this.getLocalization().getX() -1>=0) {
-                searched = Main.getFields()[this.getLocalization().getX() -1][this.getLocalization().getY() - 1];
+            if (this.getLocalization().getY() - 1 >= 0 && this.getLocalization().getX() - 1 >= 0) {
+                searched = Main.getFields()[this.getLocalization().getX() - 1][this.getLocalization().getY() - 1];
                 if (canEnPassante != null && searched.getLocalization().compare(canEnPassante) && canEnPassanteWhite != isWhite())
                     avaliable.add(searched);
                 if (searched.getClass() != Field.class && ((Piece) searched).isWhite() != isWhite())

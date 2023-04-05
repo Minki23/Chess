@@ -175,6 +175,6 @@ public class Rook extends Piece {
     @Override
     public void movePiece(Piece piece) {
         super.movePiece(piece);
-        this.moved =true;
+        this.moved = true;
     }
 }

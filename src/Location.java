@@ -19,7 +19,8 @@ public class Location {
     public String toString() {
         return "X=" + X + " Y=" + Y;
     }
-    public boolean compare(Location location){
+
+    public boolean compare(Location location) {
         return this.getX() == location.getX() && this.getY() == location.getY();
     }
 }

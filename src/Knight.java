@@ -22,31 +22,31 @@ public class Knight extends Piece {
         ArrayList<Field> avaliable = new ArrayList<>();
         Field searched;
         if (this.getLocalization().getX() + 1 < 8 && this.getLocalization().getY() + 2 < 8) {
-            searched= Main.getFields()[this.getLocalization().getX() + 1][this.getLocalization().getY() + 2];
+            searched = Main.getFields()[this.getLocalization().getX() + 1][this.getLocalization().getY() + 2];
             if (searched.getClass() == Field.class)
                 avaliable.add(searched);
             else if (((Piece) searched).isWhite() != piece.isWhite()) {
                 avaliable.add(searched);
             }
         }
-        if (this.getLocalization().getX() - 1 >=0 && this.getLocalization().getY() + 2 < 8) {
-            searched= Main.getFields()[this.getLocalization().getX() - 1][this.getLocalization().getY() + 2];
+        if (this.getLocalization().getX() - 1 >= 0 && this.getLocalization().getY() + 2 < 8) {
+            searched = Main.getFields()[this.getLocalization().getX() - 1][this.getLocalization().getY() + 2];
             if (searched.getClass() == Field.class)
                 avaliable.add(searched);
             else if (((Piece) searched).isWhite() != piece.isWhite()) {
                 avaliable.add(searched);
             }
         }
-        if (this.getLocalization().getX() + 1 < 8 && this.getLocalization().getY() - 2 >=0) {
-            searched= Main.getFields()[this.getLocalization().getX() + 1][this.getLocalization().getY() - 2];
+        if (this.getLocalization().getX() + 1 < 8 && this.getLocalization().getY() - 2 >= 0) {
+            searched = Main.getFields()[this.getLocalization().getX() + 1][this.getLocalization().getY() - 2];
             if (searched.getClass() == Field.class)
                 avaliable.add(searched);
             else if (((Piece) searched).isWhite() != piece.isWhite()) {
                 avaliable.add(searched);
             }
         }
-        if (this.getLocalization().getX() - 1 >=0 && this.getLocalization().getY() - 2 >=0) {
-            searched= Main.getFields()[this.getLocalization().getX() - 1][this.getLocalization().getY() - 2];
+        if (this.getLocalization().getX() - 1 >= 0 && this.getLocalization().getY() - 2 >= 0) {
+            searched = Main.getFields()[this.getLocalization().getX() - 1][this.getLocalization().getY() - 2];
             if (searched.getClass() == Field.class)
                 avaliable.add(searched);
             else if (((Piece) searched).isWhite() != piece.isWhite()) {
@@ -54,7 +54,7 @@ public class Knight extends Piece {
             }
         }
         if (this.getLocalization().getX() + 2 < 8 && this.getLocalization().getY() + 1 < 8) {
-            searched= Main.getFields()[this.getLocalization().getX() + 2][this.getLocalization().getY() + 1];
+            searched = Main.getFields()[this.getLocalization().getX() + 2][this.getLocalization().getY() + 1];
             if (searched.getClass() == Field.class)
                 avaliable.add(searched);
             else if (((Piece) searched).isWhite() != piece.isWhite()) {
@@ -62,7 +62,7 @@ public class Knight extends Piece {
             }
         }
         if (this.getLocalization().getX() - 2 >= 0 && this.getLocalization().getY() + 1 < 8) {
-            searched= Main.getFields()[this.getLocalization().getX() - 2][this.getLocalization().getY() + 1];
+            searched = Main.getFields()[this.getLocalization().getX() - 2][this.getLocalization().getY() + 1];
             if (searched.getClass() == Field.class)
                 avaliable.add(searched);
             else if (((Piece) searched).isWhite() != piece.isWhite()) {
@@ -70,7 +70,7 @@ public class Knight extends Piece {
             }
         }
         if (this.getLocalization().getX() + 2 < 8 && this.getLocalization().getY() - 1 >= 0) {
-            searched= Main.getFields()[this.getLocalization().getX() + 2][this.getLocalization().getY() - 1];
+            searched = Main.getFields()[this.getLocalization().getX() + 2][this.getLocalization().getY() - 1];
             if (searched.getClass() == Field.class)
                 avaliable.add(searched);
             else if (((Piece) searched).isWhite() != piece.isWhite()) {
@@ -78,7 +78,7 @@ public class Knight extends Piece {
             }
         }
         if (this.getLocalization().getX() - 2 >= 0 && this.getLocalization().getY() - 1 >= 0) {
-            searched= Main.getFields()[this.getLocalization().getX() - 2][this.getLocalization().getY() - 1];
+            searched = Main.getFields()[this.getLocalization().getX() - 2][this.getLocalization().getY() - 1];
             if (searched.getClass() == Field.class)
                 avaliable.add(searched);
             else if (((Piece) searched).isWhite() != piece.isWhite()) {

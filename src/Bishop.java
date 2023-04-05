@@ -21,7 +21,7 @@ public class Bishop extends Piece {
     public ArrayList<Field> freeLocation(Piece piece, boolean checkforChecks, boolean insert, Field insertField, boolean treatAsEmpty, Field treatedAsEmpty) {
         ArrayList<Field> avaliable = new ArrayList<>();
         Field searched;
-        if(isWhite()) {
+        if (isWhite()) {
             for (int i = 1; i < 8; i++) {
                 if (0 <= this.getLocalization().getX() - i && 0 <= this.getLocalization().getY() - i) {
                     searched = Main.getFields()[this.getLocalization().getX() - i][this.getLocalization().getY() - i];
@@ -86,7 +86,7 @@ public class Bishop extends Piece {
                     }
                 }
             }
-        }else{
+        } else {
             for (int i = 1; i < 8; i++) {
                 if (0 <= this.getLocalization().getX() - i && 0 <= this.getLocalization().getY() - i) {
                     searched = Main.getFields()[this.getLocalization().getX() - i][this.getLocalization().getY() - i];
@@ -145,8 +145,7 @@ public class Bishop extends Piece {
                     } else {
                         if (((Piece) searched).isWhite() != piece.isWhite()) {
                             avaliable.add(searched);
-                        }
-                        else
+                        } else
                             searched.getAttacksbyBlack().add(this);
                         i = 8;
                     }
