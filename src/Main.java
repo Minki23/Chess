@@ -3,13 +3,13 @@ import java.util.ArrayList;
 
 public class Main {
     private static final JFrame frame = new JFrame();
-    private static final Pole[][] Pola = new Pole[8][8];
-    private static final JPanel szachownica = new JPanel();
-    static boolean turaBialych = true;
-    private static King BialyKrol;
-    private static final ArrayList<Figura> Biale = new ArrayList<>();
-    private static King CzarnyKrol;
-    private static final ArrayList<Figura> Czarne = new ArrayList<>();
+    private static final Field[][] Fields = new Field[8][8];
+    private static final JPanel chessBoard = new JPanel();
+    static boolean whitesTurn = true;
+    private static King whiteKing;
+    private static final ArrayList<Piece> WhitePieces = new ArrayList<>();
+    private static King blackKing;
+    private static final ArrayList<Piece> BlackPieces = new ArrayList<>();
 
 
     public static void main(String[] args) {
@@ -22,97 +22,97 @@ public class Main {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        szachownica.setSize(450, 450);
-        szachownica.setLayout(null);
+        chessBoard.setSize(450, 450);
+        chessBoard.setLayout(null);
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                Pole pole = new Pole(new Polozenie(i, j));
-                pole.setEnabled(false);
-                Pola[i][j] = pole;
+                Field field = new Field(new Location(i, j));
+                field.setEnabled(false);
+                Fields[i][j] = field;
             }
         }
-        Pola[0][0] = new Rook(new Polozenie(0, 0), true);
-        Biale.add((Figura) Pola[0][0]);
-        Pola[7][0] = new Rook(new Polozenie(7, 0), true);
-        Biale.add((Figura) Pola[7][0]);
-        Pola[0][7] = new Rook(new Polozenie(0, 7), false);
-        Czarne.add((Figura) Pola[0][7]);
-        Pola[7][7] = new Rook(new Polozenie(7, 7), false);
-        Czarne.add((Figura) Pola[7][7]);
-        Pola[6][7] = new Knight(new Polozenie(6, 7), false);
-        Czarne.add((Figura) Pola[6][7]);
-        Pola[1][7] = new Knight(new Polozenie(1, 7), false);
-        Czarne.add((Figura) Pola[1][7]);
-        Pola[6][0] = new Knight(new Polozenie(6, 0), true);
-        Biale.add((Figura) Pola[6][0]);
-        Pola[1][0] = new Knight(new Polozenie(1, 0), true);
-        Biale.add((Figura) Pola[1][0]);
-        Pola[5][7] = new Bishop(new Polozenie(5, 7), false);
-        Czarne.add((Figura) Pola[5][7]);
-        Pola[2][7] = new Bishop(new Polozenie(2, 7), false);
-        Czarne.add((Figura) Pola[2][7]);
-        Pola[5][0] = new Bishop(new Polozenie(5, 0), true);
-        Biale.add((Figura) Pola[5][0]);
-        Pola[2][0] = new Bishop(new Polozenie(2, 0), true);
-        Biale.add((Figura) Pola[2][0]);
-        Pola[3][7] = new Queen(new Polozenie(3, 7), false);
-        Czarne.add((Figura) Pola[3][7]);
-        Pola[3][0] = new Queen(new Polozenie(3, 0), true);
-        Biale.add((Figura) Pola[3][0]);
-        Pola[4][7] = new King(new Polozenie(4, 7), false);
-        CzarnyKrol = (King) Pola[4][7];
-        Czarne.add((Figura) Pola[4][7]);
-        Pola[4][0] = new King(new Polozenie(4, 0), true);
-        BialyKrol = (King) Pola[4][0];
-        Biale.add((Figura) Pola[4][0]);
+        Fields[0][0] = new Rook(new Location(0, 0), true);
+        WhitePieces.add((Piece) Fields[0][0]);
+        Fields[7][0] = new Rook(new Location(7, 0), true);
+        WhitePieces.add((Piece) Fields[7][0]);
+        Fields[0][7] = new Rook(new Location(0, 7), false);
+        BlackPieces.add((Piece) Fields[0][7]);
+        Fields[7][7] = new Rook(new Location(7, 7), false);
+        BlackPieces.add((Piece) Fields[7][7]);
+        Fields[6][7] = new Knight(new Location(6, 7), false);
+        BlackPieces.add((Piece) Fields[6][7]);
+        Fields[1][7] = new Knight(new Location(1, 7), false);
+        BlackPieces.add((Piece) Fields[1][7]);
+        Fields[6][0] = new Knight(new Location(6, 0), true);
+        WhitePieces.add((Piece) Fields[6][0]);
+        Fields[1][0] = new Knight(new Location(1, 0), true);
+        WhitePieces.add((Piece) Fields[1][0]);
+        Fields[5][7] = new Bishop(new Location(5, 7), false);
+        BlackPieces.add((Piece) Fields[5][7]);
+        Fields[2][7] = new Bishop(new Location(2, 7), false);
+        BlackPieces.add((Piece) Fields[2][7]);
+        Fields[5][0] = new Bishop(new Location(5, 0), true);
+        WhitePieces.add((Piece) Fields[5][0]);
+        Fields[2][0] = new Bishop(new Location(2, 0), true);
+        WhitePieces.add((Piece) Fields[2][0]);
+        Fields[3][7] = new Queen(new Location(3, 7), false);
+        BlackPieces.add((Piece) Fields[3][7]);
+        Fields[3][0] = new Queen(new Location(3, 0), true);
+        WhitePieces.add((Piece) Fields[3][0]);
+        Fields[4][7] = new King(new Location(4, 7), false);
+        blackKing = (King) Fields[4][7];
+        BlackPieces.add((Piece) Fields[4][7]);
+        Fields[4][0] = new King(new Location(4, 0), true);
+        whiteKing = (King) Fields[4][0];
+        WhitePieces.add((Piece) Fields[4][0]);
         for (int i = 0; i < 8; i++) {
-            Pola[i][6] = new Pion(new Polozenie(i, 6), false);
-            ((Figura) Pola[i][6]).setYourKing(CzarnyKrol);
-            Czarne.add((Figura) Pola[i][6]);
-            Pola[i][1] = new Pion(new Polozenie(i, 1), true);
-            ((Figura) Pola[i][1]).setYourKing(BialyKrol);
-            Biale.add((Figura) Pola[i][1]);
+            Fields[i][6] = new Pawn(new Location(i, 6), false);
+            ((Piece) Fields[i][6]).setYourKing(blackKing);
+            BlackPieces.add((Piece) Fields[i][6]);
+            Fields[i][1] = new Pawn(new Location(i, 1), true);
+            ((Piece) Fields[i][1]).setYourKing(whiteKing);
+            WhitePieces.add((Piece) Fields[i][1]);
         }
-        for (Figura figura : Biale) {
-            figura.setYourKing(BialyKrol);
-            figura.setYourPieces(Biale);
-            figura.setEnemyPieces(Czarne);
+        for (Piece piece : WhitePieces) {
+            piece.setYourKing(whiteKing);
+            piece.setYourPieces(WhitePieces);
+            piece.setEnemyPieces(BlackPieces);
         }
-        for (Figura figura : Czarne) {
-            figura.setYourKing(CzarnyKrol);
-            figura.setYourPieces(Czarne);
-            figura.setEnemyPieces(Biale);
+        for (Piece piece : BlackPieces) {
+            piece.setYourKing(blackKing);
+            piece.setYourPieces(BlackPieces);
+            piece.setEnemyPieces(WhitePieces);
         }
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                szachownica.add(Pola[i][j]);
+                chessBoard.add(Fields[i][j]);
             }
         }
-        frame.add(szachownica);
+        frame.add(chessBoard);
         frame.revalidate();
     }
 
-    public static King getBialyKrol() {
-        return BialyKrol;
+    public static King getWhiteKing() {
+        return whiteKing;
     }
 
-    public static King getCzarnyKrol() {
-        return CzarnyKrol;
+    public static King getBlackKing() {
+        return blackKing;
     }
 
-    public static JPanel getSzachownica() {
-        return szachownica;
+    public static JPanel getChessBoard() {
+        return chessBoard;
     }
 
-    public static ArrayList<Figura> getBiale() {
-        return Biale;
+    public static ArrayList<Piece> getWhitePieces() {
+        return WhitePieces;
     }
 
-    public static ArrayList<Figura> getCzarne() {
-        return Czarne;
+    public static ArrayList<Piece> getBlackPieces() {
+        return BlackPieces;
     }
 
-    public static Pole[][] getPola() {
-        return Pola;
+    public static Field[][] getFields() {
+        return Fields;
     }
 }

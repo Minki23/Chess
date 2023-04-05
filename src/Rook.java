@@ -1,12 +1,12 @@
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class Rook extends Figura {
-    private boolean wykonanoRuch;
+public class Rook extends Piece {
+    private boolean moved;
 
-    public Rook(Polozenie polozenie, boolean biale) {
-        super(polozenie, biale);
-        if (biale) {
+    public Rook(Location location, boolean white) {
+        super(location, white);
+        if (white) {
             Icon icon = new ImageIcon("src/Icons/WhiteRook.png");
             this.setIcon(icon);
             this.setContentAreaFilled(false);
@@ -16,179 +16,165 @@ public class Rook extends Figura {
             this.setContentAreaFilled(false);
             this.setEnabled(false);
         }
-        wykonanoRuch = false;
+        moved = false;
     }
 
 
     @Override
-    public ArrayList<Pole> DozwolonePola(Figura figura, boolean checkforChecks, boolean wciskane, Pole pole, boolean puste, Pole pole2) {
-        ArrayList<Pole> dostepne = new ArrayList<>();
-        Pole szukane;
-        if (isBiale()) {
+    public ArrayList<Field> freeLocation(Piece piece, boolean checkforChecks, boolean insert, Field insertField, boolean treatAsEmpty, Field treatedAsEmpty) {
+        ArrayList<Field> avaliable = new ArrayList<>();
+        Field searched;
+        if (isWhite()) {
             for (int i = 1; i < 8; i++) {
-                if (0 <= this.getPolozenie().getY() - i) {
-                    szukane = Main.getPola()[this.getPolozenie().getX()][this.getPolozenie().getY() - i];
-                    if (szukane.getClass() == Pole.class || (puste && szukane == pole2)) {
-                        if (!(wciskane && szukane == pole)) {
-                            dostepne.add(szukane);
+                if (0 <= this.getLocalization().getY() - i) {
+                    searched = Main.getFields()[this.getLocalization().getX()][this.getLocalization().getY() - i];
+                    if (searched.getClass() == Field.class || (treatAsEmpty && searched == treatedAsEmpty)) {
+                        if (!(insert && searched == insertField)) {
+                            avaliable.add(searched);
                         } else i = 8;
                     } else {
-                        if (((Figura) szukane).isBiale() != figura.isBiale()) {
-                            dostepne.add(szukane);
+                        if (((Piece) searched).isWhite() != piece.isWhite()) {
+                            avaliable.add(searched);
                         } else
-                            szukane.getAttacksbyWhite().add(this);
+                            searched.getAttacksbyWhite().add(this);
                         i = 8;
                     }
                 }
             }
             for (int i = 1; i < 8; i++) {
-                if (8 > this.getPolozenie().getY() + i) {
-                    szukane = Main.getPola()[this.getPolozenie().getX()][this.getPolozenie().getY() + i];
-                    if (szukane.getClass() == Pole.class || (puste && szukane == pole2)) {
-                        if (!(wciskane && szukane == pole)) {
-                            dostepne.add(szukane);
+                if (8 > this.getLocalization().getY() + i) {
+                    searched = Main.getFields()[this.getLocalization().getX()][this.getLocalization().getY() + i];
+                    if (searched.getClass() == Field.class || (treatAsEmpty && searched == treatedAsEmpty)) {
+                        if (!(insert && searched == insertField)) {
+                            avaliable.add(searched);
                         } else i = 8;
                     } else {
-                        if (((Figura) szukane).isBiale() != figura.isBiale()) {
-                            dostepne.add(szukane);
+                        if (((Piece) searched).isWhite() != piece.isWhite()) {
+                            avaliable.add(searched);
                         } else
-                            szukane.getAttacksbyWhite().add(this);
+                            searched.getAttacksbyWhite().add(this);
                         i = 8;
                     }
                 }
             }
             for (int i = 1; i < 8; i++) {
-                if (8 > this.getPolozenie().getX() + i) {
-                    szukane = Main.getPola()[this.getPolozenie().getX() + i][this.getPolozenie().getY()];
-                    if (szukane.getClass() == Pole.class || (puste && szukane == pole2)) {
-                        if (!(wciskane && szukane == pole)) {
-                            dostepne.add(szukane);
+                if (8 > this.getLocalization().getX() + i) {
+                    searched = Main.getFields()[this.getLocalization().getX() + i][this.getLocalization().getY()];
+                    if (searched.getClass() == Field.class || (treatAsEmpty && searched == treatedAsEmpty)) {
+                        if (!(insert && searched == insertField)) {
+                            avaliable.add(searched);
                         } else i = 8;
                     } else {
-                        if (((Figura) szukane).isBiale() != figura.isBiale()) {
-                            dostepne.add(szukane);
+                        if (((Piece) searched).isWhite() != piece.isWhite()) {
+                            avaliable.add(searched);
                         } else
-                            szukane.getAttacksbyWhite().add(this);
+                            searched.getAttacksbyWhite().add(this);
                         i = 8;
                     }
                 }
             }
             for (int i = 1; i < 8; i++) {
-                if (0 <= this.getPolozenie().getX() - i) {
-                    szukane = Main.getPola()[this.getPolozenie().getX() - i][this.getPolozenie().getY()];
-                    if (szukane.getClass() == Pole.class || (puste && szukane == pole2)) {
-                        if (!(wciskane && szukane == pole)) {
-                            dostepne.add(szukane);
+                if (0 <= this.getLocalization().getX() - i) {
+                    searched = Main.getFields()[this.getLocalization().getX() - i][this.getLocalization().getY()];
+                    if (searched.getClass() == Field.class || (treatAsEmpty && searched == treatedAsEmpty)) {
+                        if (!(insert && searched == insertField)) {
+                            avaliable.add(searched);
                         } else i = 8;
                     } else {
-                        if (((Figura) szukane).isBiale() != figura.isBiale()) {
-                            dostepne.add(szukane);
+                        if (((Piece) searched).isWhite() != piece.isWhite()) {
+                            avaliable.add(searched);
                         } else
-                            szukane.getAttacksbyWhite().add(this);
+                            searched.getAttacksbyWhite().add(this);
                         i = 8;
                     }
                 }
             }
         } else {
             for (int i = 1; i < 8; i++) {
-                if (0 <= this.getPolozenie().getY() - i) {
-                    szukane = Main.getPola()[this.getPolozenie().getX()][this.getPolozenie().getY() - i];
-                    if (szukane.getClass() == Pole.class || (puste && szukane == pole2)) {
-                        if (!(wciskane && szukane == pole)) {
-                            dostepne.add(szukane);
+                if (0 <= this.getLocalization().getY() - i) {
+                    searched = Main.getFields()[this.getLocalization().getX()][this.getLocalization().getY() - i];
+                    if (searched.getClass() == Field.class || (treatAsEmpty && searched == treatedAsEmpty)) {
+                        if (!(insert && searched == insertField)) {
+                            avaliable.add(searched);
                         } else i = 8;
                     } else {
-                        if (((Figura) szukane).isBiale() != figura.isBiale()) {
-                            dostepne.add(szukane);
+                        if (((Piece) searched).isWhite() != piece.isWhite()) {
+                            avaliable.add(searched);
                         } else
-                            szukane.getAttacksbyBlack().add(this);
+                            searched.getAttacksbyBlack().add(this);
                         i = 8;
                     }
                 }
             }
             for (int i = 1; i < 8; i++) {
-                if (8 > this.getPolozenie().getY() + i) {
-                    szukane = Main.getPola()[this.getPolozenie().getX()][this.getPolozenie().getY() + i];
-                    if (szukane.getClass() == Pole.class || (puste && szukane == pole2)) {
-                        if (!(wciskane && szukane == pole)) {
-                            dostepne.add(szukane);
+                if (8 > this.getLocalization().getY() + i) {
+                    searched = Main.getFields()[this.getLocalization().getX()][this.getLocalization().getY() + i];
+                    if (searched.getClass() == Field.class || (treatAsEmpty && searched == treatedAsEmpty)) {
+                        if (!(insert && searched == insertField)) {
+                            avaliable.add(searched);
                         } else i = 8;
                     } else {
-                        if (((Figura) szukane).isBiale() != figura.isBiale()) {
-                            dostepne.add(szukane);
+                        if (((Piece) searched).isWhite() != piece.isWhite()) {
+                            avaliable.add(searched);
                         } else
-                            szukane.getAttacksbyBlack().add(this);
+                            searched.getAttacksbyBlack().add(this);
                         i = 8;
                     }
                 }
             }
             for (int i = 1; i < 8; i++) {
-                if (8 > this.getPolozenie().getX() + i) {
-                    szukane = Main.getPola()[this.getPolozenie().getX() + i][this.getPolozenie().getY()];
-                    if (szukane.getClass() == Pole.class || (puste && szukane == pole2)) {
-                        if (!(wciskane && szukane == pole)) {
-                            dostepne.add(szukane);
+                if (8 > this.getLocalization().getX() + i) {
+                    searched = Main.getFields()[this.getLocalization().getX() + i][this.getLocalization().getY()];
+                    if (searched.getClass() == Field.class || (treatAsEmpty && searched == treatedAsEmpty)) {
+                        if (!(insert && searched == insertField)) {
+                            avaliable.add(searched);
                         } else i = 8;
                     } else {
-                        if (((Figura) szukane).isBiale() != figura.isBiale()) {
-                            dostepne.add(szukane);
+                        if (((Piece) searched).isWhite() != piece.isWhite()) {
+                            avaliable.add(searched);
                         } else
-                            szukane.getAttacksbyBlack().add(this);
+                            searched.getAttacksbyBlack().add(this);
                         i = 8;
                     }
                 }
             }
             for (int i = 1; i < 8; i++) {
-                if (0 <= this.getPolozenie().getX() - i) {
-                    szukane = Main.getPola()[this.getPolozenie().getX() - i][this.getPolozenie().getY()];
-                    if (szukane.getClass() == Pole.class || (puste && szukane == pole2)) {
-                        if (!(wciskane && szukane == pole)) {
-                            dostepne.add(szukane);
+                if (0 <= this.getLocalization().getX() - i) {
+                    searched = Main.getFields()[this.getLocalization().getX() - i][this.getLocalization().getY()];
+                    if (searched.getClass() == Field.class || (treatAsEmpty && searched == treatedAsEmpty)) {
+                        if (!(insert && searched == insertField)) {
+                            avaliable.add(searched);
                         } else i = 8;
                     } else {
-                        if (((Figura) szukane).isBiale() != figura.isBiale()) {
-                            dostepne.add(szukane);
+                        if (((Piece) searched).isWhite() != piece.isWhite()) {
+                            avaliable.add(searched);
                         } else
-                            szukane.getAttacksbyBlack().add(this);
+                            searched.getAttacksbyBlack().add(this);
                         i = 8;
                     }
                 }
             }
         }
         if (checkforChecks) {
-            if (this.isBiale() && Main.getBialyKrol().getAttacksbyBlack().size() == 1) {
-                for (Pole bierka : DozwolonePola(Main.getBialyKrol().getAttacksbyBlack().get(0), false, false, null, false, null))
-                    for (Pole bierka1 : DozwolonePola(this, false, false, null, false, null))
-                        if (bierka1.getPolozenie().compare(bierka.getPolozenie()))
-                            dostepne.add(bierka1);
-            } else if (!this.isBiale() && Main.getCzarnyKrol().getAttacksbyWhite().size() == 1) {
-                dostepne.clear();
-                for (Pole bierka : DozwolonePola(Main.getCzarnyKrol().getAttacksbyWhite().get(0), false, false, null, false, null))
-                    for (Pole bierka1 : DozwolonePola(this, false, false, null, false, null))
-                        if (bierka1.getPolozenie().compare(bierka.getPolozenie()))
-                            dostepne.add(bierka1);
+            ArrayList<Field> legal = new ArrayList<>();
+            for (Field avaliableField : avaliable) {
+                if (wouldPutInCheckOnMove(this, avaliableField))
+                    legal.add(avaliableField);
             }
-        }
-        if (checkforChecks) {
-            ArrayList<Pole> poprawne = new ArrayList<>();
-            for (Pole pole1 : dostepne) {
-                if (wouldPutInCheckOnMove(this, pole1))
-                    poprawne.add(pole1);
-            }
-            dostepne = poprawne;
+            avaliable = legal;
         }
         if (checkforChecks && getYourKing().isChecked())
-            dostepne = blokuje(dostepne);
-        return dostepne;
+            avaliable = blocks(avaliable);
+        return avaliable;
     }
 
-    public boolean isWykonanoRuch() {
-        return wykonanoRuch;
+    public boolean hasMoved() {
+        return moved;
     }
 
     @Override
-    public void movePiece(Figura figura) {
-        super.movePiece(figura);
-        this.wykonanoRuch=true;
+    public void movePiece(Piece piece) {
+        super.movePiece(piece);
+        this.moved =true;
     }
 }

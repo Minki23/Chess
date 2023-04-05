@@ -1,8 +1,8 @@
-public class Polozenie {
+public class Location {
     private final int X;
     private final int Y;
 
-    public Polozenie(int x, int y) {
+    public Location(int x, int y) {
         X = x;
         Y = y;
     }
@@ -19,7 +19,7 @@ public class Polozenie {
     public String toString() {
         return "X=" + X + " Y=" + Y;
     }
-    public boolean compare(Polozenie polozenie){
-        return this.getX() == polozenie.getX() && this.getY() == polozenie.getY();
+    public boolean compare(Location location){
+        return this.getX() == location.getX() && this.getY() == location.getY();
     }
 }
