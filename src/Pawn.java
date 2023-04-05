@@ -60,9 +60,11 @@ public class Pawn extends Piece {
                 if (searched.getClass() == Field.class) {
                     avaliable.add(searched);
                     if (this.getLocalization().getY() - 2 >= 0) {
-                        searched = Main.getFields()[this.getLocalization().getX()][this.getLocalization().getY() - 2];
-                        if (!moved && searched.getClass() == Field.class)
-                            avaliable.add(searched);
+                        if(!moved) {
+                            searched = Main.getFields()[this.getLocalization().getX()][this.getLocalization().getY() - 2];
+                            if (searched.getClass() == Field.class)
+                                avaliable.add(searched);
+                        }
                     }
                 }
             }
@@ -85,9 +87,11 @@ public class Pawn extends Piece {
                 searched = Main.getFields()[this.getLocalization().getX()][this.getLocalization().getY() + 1];
                 if (searched.getClass() == Field.class) {
                     avaliable.add(searched);
-                    searched = Main.getFields()[this.getLocalization().getX()][this.getLocalization().getY() + 2];
-                    if (!moved && searched.getClass() == Field.class)
-                        avaliable.add(searched);
+                    if(!moved) {
+                        searched = Main.getFields()[this.getLocalization().getX()][this.getLocalization().getY() + 2];
+                        if (searched.getClass() == Field.class)
+                            avaliable.add(searched);
+                    }
                 }
             }
             if (this.getLocalization().getY() + 1 < 8 && this.getLocalization().getX() - 1 >= 0) {
