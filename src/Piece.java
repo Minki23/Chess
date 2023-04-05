@@ -147,8 +147,8 @@ public abstract class Piece extends Field {
                 }
             }
             int legalMoves = 0;
-            for (Piece blackPieces : Main.getBlackPieces()) {
-                legalMoves += blackPieces.AvaliableLocation(blackPieces, true, false, null, false, null).size();
+            for (Piece blackPiece : Main.getBlackPieces()) {
+                legalMoves += blackPiece.AvaliableLocation(blackPiece, true, false, null, false, null).size();
             }
             if (legalMoves == 0 && Main.getBlackKing().isChecked())
                 Popup("White win");

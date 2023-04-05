@@ -75,7 +75,7 @@ public class King extends Piece {
                 }
             }
             if (!moved && Main.getFields()[0][0].getClass() == Rook.class && (!((Rook) Main.getFields()[0][0]).hasMoved()) && Main.getFields()[3][0].getClass() == Field.class && Main.getFields()[2][0].getClass() == Field.class && Main.getFields()[1][0].getClass() == Field.class) {
-                if (Main.getFields()[2][0].getAttacksbyWhite().size() == 0 && Main.getFields()[3][0].getAttacksbyWhite().size() == 0 && !isChecked) {
+                if (Main.getFields()[2][0].getAttacksbyBlack().size() == 0 && Main.getFields()[3][0].getAttacksbyBlack().size() == 0 && !isChecked) {
                     avaliable.add(Main.getFields()[2][0]);
                     castle = true;
                 }
